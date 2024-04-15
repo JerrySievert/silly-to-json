@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "conversion.h"
+#include "export.h"
 
 json_t *direction_from_number(int direction);
 json_t *sector_type_from_number(int type);
@@ -61,6 +62,27 @@ json_t *direction_from_number(int direction) {
   }
 
   return ret;
+}
+
+json_t *door_state(unsigned int state) {
+  json_t *array = json_array( );
+
+  if (state == 0) {
+    json_array_append(array, json_string("DOOR"));
+  }
+
+  if (state == 1) {
+    json_array_append(array, json_string("DOOR"));
+    json_array_append(array, json_string("CLOSED"));
+  }
+
+  if (state == 2) {
+    json_array_append(array, json_string("DOOR"));
+    json_array_append(array, json_string("CLOSED"));
+    json_array_append(array, json_string("LOCKED"));
+  }
+
+  return array;
 }
 
 json_t *sector_type_from_number(int type) {
@@ -415,8 +437,130 @@ json_t *zone_command(char command) {
   return cmd;
 }
 
-json_t *export_zone(struct zone_data *zone) {
+json_t *arguments_for_command(struct reset_com *command) {
+  json_t *arg1 = NULL, *arg2 = NULL, *arg3 = NULL;
+
+  switch (command->command) {
+  case 'M':
+    arg1 = json_integer(command->arg1);
+    arg2 = json_integer(command->arg2);
+    arg3 = json_integer(command->arg3);
+    break;
+
+  case 'C':
+    arg1 = json_integer(command->arg1);
+    arg2 = json_integer(command->arg2);
+    arg3 = act(command->arg3);
+    break;
+
+  case 'Z':
+    arg1 = json_integer(command->arg1);
+    break;
+
+  case 'O':
+    arg1 = json_integer(command->arg1);
+    arg2 = json_integer(command->arg2);
+    arg3 = json_integer(command->arg3);
+    break;
+
+  case 'P':
+    arg1 = json_integer(command->arg1);
+    arg2 = json_integer(command->arg2);
+    arg3 = json_integer(command->arg3);
+    break;
+
+  case 'G':
+    arg1 = json_integer(command->arg1);
+    arg2 = json_integer(command->arg2);
+    arg3 = json_integer(command->arg3);
+    break;
+
+  case 'H':
+    arg1 = hates_name(command->arg1);
+    arg2 = hates_value(command->arg1, command->arg2);
+    break;
+
+  case 'F':
+    arg1 = fears_name(command->arg1);
+    arg2 = fears_value(command->arg1, command->arg2);
+    break;
+
+  case 'E':
+    arg1 = json_integer(command->arg1);
+    arg2 = json_integer(command->arg2);
+    arg3 = equipment_slot(command->arg3);
+    break;
+
+  case 'D':
+    arg1 = json_integer(command->arg1);
+    arg2 = direction_from_number(command->arg2);
+    arg3 = door_state(command->arg3);
+    break;
+  }
+
+  json_t *arguments = json_object( );
+
+  json_object_set(arguments, "arg1", arg1);
+  json_object_set(arguments, "arg2", arg2);
+  json_object_set(arguments, "arg3", arg3);
+
+  return arguments;
+}
+
+json_t *reset_mode(int reset_mode) {
+  json_t *array = json_array( );
+
+  if (reset_mode & ZONE_NEVER) {
+    json_array_append(array, json_string("NEVER"));
+  }
+
+  if (reset_mode & ZONE_EMPTY) {
+    json_array_append(array, json_string("EMPTY"));
+  }
+
+  if (reset_mode & ZONE_ALWAYS) {
+    json_array_append(array, json_string("ALWAYS"));
+  }
+
+  if (reset_mode & ZONE_ASTRAL) {
+    json_array_append(array, json_string("ASTRAL"));
+  }
+
+  if (reset_mode & ZONE_DESERT) {
+    json_array_append(array, json_string("DESERT"));
+  }
+
+  if (reset_mode & ZONE_ARCTIC) {
+    json_array_append(array, json_string("ARCTIC"));
+  }
+
+  if (reset_mode & ZONE_HADES) {
+    json_array_append(array, json_string("HADES"));
+  }
+
+  if (reset_mode & ZONE_OLYMPUS) {
+    json_array_append(array, json_string("OLYMPUS"));
+  }
+
+  if (reset_mode & ZONE_ABYSS) {
+    json_array_append(array, json_string("ABYSS"));
+  }
+
+  if (reset_mode & ZONE_PMP) {
+    json_array_append(array, json_string("PRIME_MATERIAL_PLANE"));
+  }
+
+  if (reset_mode & ZONE_LIMBO) {
+    json_array_append(array, json_string("LIMBO"));
+  }
+
+  return array;
+}
+
+json_t *export_zone(struct zone_data *zone, long zone_number) {
   json_t *root = json_object( );
+
+  json_object_set(root, "zone_number", json_integer(zone_number));
 
   json_t *name = json_string(zone->name);
   json_object_set(root, "name", name);
@@ -424,39 +568,35 @@ json_t *export_zone(struct zone_data *zone) {
   json_t *lifespan = json_integer(zone->lifespan);
   json_object_set(root, "lifespan", lifespan);
 
-  json_t *age = json_integer(zone->age);
-  json_object_set(root, "age", age);
-
   json_t *top = json_integer(zone->top);
   json_object_set(root, "top", top);
 
-  json_t *start = json_integer(zone->start);
-  json_object_set(root, "start", start);
-
-  json_t *reset_mode = json_integer(zone->reset_mode);
-  json_object_set(root, "reset_mode", reset_mode);
+  json_object_set(root, "reset_mode", reset_mode(zone->reset_mode));
 
   if (zone->cmd) {
-    json_t *reset_command = json_object( );
-    json_t *command       = zone_command(zone->cmd->command);
+    json_t *reset_array   = json_array( );
+    struct reset_com *cmd = zone->cmd;
 
-    if (command) {
+    for (void *iter = cmd; iter; iter += sizeof(struct reset_com)) {
+      json_t *reset_command = json_object( );
+      json_t *command       = zone_command(((struct reset_com *)iter)->command);
+
+      if (command == NULL) {
+        break;
+      }
+
       json_object_set(reset_command, "command", command);
 
-      json_t *if_flag = json_boolean(zone->cmd->if_flag);
+      struct reset_com *cmd = (struct reset_com *)iter;
+      json_t *if_flag       = json_boolean(cmd->if_flag);
       json_object_set(reset_command, "if_flag", if_flag);
 
-      json_t *arg1 = json_integer(zone->cmd->arg1);
-      json_object_set(reset_command, "arg1", arg1);
+      json_object_set(reset_command, "arguments", arguments_for_command(cmd));
 
-      json_t *arg2 = json_integer(zone->cmd->arg2);
-      json_object_set(reset_command, "arg2", arg1);
-
-      json_t *arg3 = json_integer(zone->cmd->arg3);
-      json_object_set(reset_command, "arg3", arg1);
-
-      json_object_set(root, "cmd", reset_command);
+      json_array_append(reset_array, reset_command);
     }
+
+    json_object_set(root, "reset_commands", reset_array);
   }
 
   json_t *current_total_gold = json_real(zone->CurrTotGold);
@@ -1448,6 +1588,62 @@ json_t *get_sex(int sex_no) {
   }
 }
 
+json_t *hates_name(unsigned int field) {
+  if (field == HATE_VNUM) {
+    return json_string("vnum");
+  }
+
+  if (field == HATE_CLASS) {
+    return json_string("class");
+  }
+
+  if (field == HATE_EVIL) {
+    return json_string("evil");
+  }
+
+  if (field == HATE_GOOD) {
+    return json_string("good");
+  }
+
+  if (field == HATE_SEX) {
+    return json_string("sex");
+  }
+
+  if (field == HATE_RACE) {
+    return json_string("race");
+  }
+
+  return NULL;
+}
+
+json_t *hates_value(unsigned int field, unsigned int argument) {
+  if (field == HATE_VNUM) {
+    return json_integer(argument);
+  }
+
+  if (field == HATE_CLASS) {
+    return get_class(argument);
+  }
+
+  if (field == HATE_EVIL) {
+    return json_integer(argument);
+  }
+
+  if (field == HATE_GOOD) {
+    return json_integer(argument);
+  }
+
+  if (field == HATE_SEX) {
+    return get_sex(argument);
+  }
+
+  if (field == HATE_RACE) {
+    return get_race(argument);
+  }
+
+  return NULL;
+}
+
 json_t *hates(unsigned int field, Opinion opinion, bool hateful) {
   json_t *obj = json_object( );
 
@@ -1480,6 +1676,62 @@ json_t *hates(unsigned int field, Opinion opinion, bool hateful) {
   }
 
   return obj;
+}
+
+json_t *fears_name(unsigned int field) {
+  if (field == FEAR_VNUM) {
+    return json_string("vnum");
+  }
+
+  if (field == FEAR_CLASS) {
+    return json_string("class");
+  }
+
+  if (field == FEAR_EVIL) {
+    return json_string("evil");
+  }
+
+  if (field == FEAR_GOOD) {
+    return json_string("good");
+  }
+
+  if (field == FEAR_SEX) {
+    return json_string("sex");
+  }
+
+  if (field == FEAR_RACE) {
+    return json_string("race");
+  }
+
+  return NULL;
+}
+
+json_t *fears_value(unsigned int field, unsigned int argument) {
+  if (field == FEAR_VNUM) {
+    return json_integer(argument);
+  }
+
+  if (field == FEAR_CLASS) {
+    return get_class(argument);
+  }
+
+  if (field == FEAR_EVIL) {
+    return json_integer(argument);
+  }
+
+  if (field == FEAR_GOOD) {
+    return json_integer(argument);
+  }
+
+  if (field == FEAR_SEX) {
+    return get_sex(argument);
+  }
+
+  if (field == FEAR_RACE) {
+    return get_race(argument);
+  }
+
+  return NULL;
 }
 
 json_t *fears(unsigned int field, Opinion opinion) {
@@ -1911,6 +2163,61 @@ json_t *specials(struct char_special_data *specials) {
   return obj;
 }
 
+json_t *equipment_slot(unsigned int slot) {
+  switch (slot) {
+  case WEAR_LIGHT:
+    return json_string("LIGHT");
+
+  case WEAR_FINGER_L:
+    return json_string("LEFT FINGER");
+
+  case WEAR_FINGER_R:
+    return json_string("RIGHT FINGER");
+
+  case WEAR_NECK_1:
+    return json_string("NECK 1");
+
+  case WEAR_NECK_2:
+    return json_string("NECK 2");
+
+  case WEAR_BODY:
+    return json_string("BODY");
+
+  case WEAR_HEAD:
+    return json_string("HEAD");
+
+  case WEAR_LEGS:
+    return json_string("LEGS");
+
+  case WEAR_ARMS:
+    return json_string("ARMS");
+
+  case WEAR_SHIELD:
+    return json_string("SHIELD");
+
+  case WEAR_ABOUT:
+    return json_string("ABOUT");
+
+  case WEAR_WAISTE:
+    return json_string("WAIST");
+
+  case WEAR_WRIST_L:
+    return json_string("LEFT WRIST");
+
+  case WEAR_WRIST_R:
+    return json_string("RIGHT WRIST");
+
+  case WIELD:
+    return json_string("WIELD");
+
+  case HOLD:
+    return json_string("HOLD");
+
+  default:
+    return NULL;
+  }
+}
+
 json_t *export_mob(struct char_data *chr) {
   json_t *root = json_object( );
 
@@ -1980,13 +2287,13 @@ int main(void) {
   fprintf(rooms_file, "%s\n", json_dumps(rooms, JSON_INDENT(2)));
   fclose(rooms_file);
 
-  json_t *zones = json_object( );
+  json_t *zones = json_array( );
 
   for (long i = 0; i < top_of_zone_table; i++) {
     char number[ 255 ];
     sprintf(number, "%ld", i);
-    json_t *zone = export_zone(&zone_table[ i ]);
-    json_object_set(zones, number, zone);
+    json_t *zone = export_zone(&zone_table[ i ], i);
+    json_array_append(zones, zone);
   }
 
   FILE *zones_file = fopen("./zones.json", "wt");

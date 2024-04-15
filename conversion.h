@@ -919,3 +919,34 @@ struct char_data {
 #define TYPE_SMITE 418
 #define TYPE_BLAST 419
 #define TYPE_SUFFERING 420
+
+#define ZONE_NEVER 0
+#define ZONE_EMPTY 1
+#define ZONE_ALWAYS 2
+#define ZONE_ASTRAL 4
+#define ZONE_DESERT 8
+#define ZONE_ARCTIC 16
+#define ZONE_HADES 32
+#define ZONE_OLYMPUS 64
+#define ZONE_ABYSS 128
+#define ZONE_PMP 256 /* Prime Material Plane */
+#define ZONE_LIMBO 512
+
+#define WEAR_LIGHT 0
+#define WEAR_FINGER_R 1
+#define WEAR_FINGER_L 2
+#define WEAR_NECK_1 3
+#define WEAR_NECK_2 4
+#define WEAR_BODY 5
+#define WEAR_HEAD 6
+#define WEAR_LEGS 7
+#define WEAR_FEET 8
+#define WEAR_HANDS 9
+#define WEAR_ARMS 10
+#define WEAR_SHIELD 11
+#define WEAR_ABOUT 12
+#define WEAR_WAISTE 13
+#define WEAR_WRIST_R 14
+#define WEAR_WRIST_L 15
+#define WIELD 16
+#define HOLD 17
