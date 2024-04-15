@@ -17,7 +17,7 @@ json_t *export_zone(struct zone_data *zone, long zone_number);
 json_t *sprintbit(unsigned long vector, const char *names[]);
 json_t *obj_flag_data(struct obj_flag_data *flags);
 json_t *obj_affected_type(struct obj_affected_type *affected);
-json_t *export_object(struct obj_data *obj);
+json_t *export_object(struct obj_data *obj, unsigned int object_number);
 json_t *get_race(int race);
 json_t *immunities(unsigned int immune);
 json_t *get_class(int class_no);

@@ -1308,11 +1308,11 @@ json_t *obj_affected_type(struct obj_affected_type *affected) {
   return array;
 }
 
-json_t *export_object(struct obj_data *obj) {
+json_t *export_object(struct obj_data *obj, unsigned int object_number) {
   json_t *root = json_object( );
 
-  json_t *number = json_integer(obj->item_number);
-  json_object_set(root, "number", number);
+  json_t *number = json_integer(object_number);
+  json_object_set(root, "object_number", number);
 
   if (obj->in_room != -1) {
     json_t *in_room = json_integer(obj->in_room);
@@ -2302,14 +2302,14 @@ int main(void) {
   fprintf(zones_file, "%s\n", json_dumps(zones, JSON_INDENT(2)));
   fclose(zones_file);
 
-  json_t *objs = json_object( );
+  json_t *objs = json_array( );
 
   FILE *in_obj_file = fopen(OBJ_FILE, "r");
   for (int i = 0; i < top_of_objt; i++) {
     char number[ 255 ];
     sprintf(number, "%d", obj_index[ i ].virtual_number);
     struct obj_data *obj = read_object(in_obj_file, i, REAL);
-    json_object_set(objs, number, export_object(obj));
+    json_array_append(objs, export_object(obj, obj_index[ i ].virtual_number));
   }
 
   FILE *obj_file = fopen("./objects.json", "wt");
