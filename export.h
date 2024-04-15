@@ -39,4 +39,4 @@ json_t *act(long act);
 json_t *saving_throw(sh_int apply_saving_throw[ 5 ]);
 json_t *specials(struct char_special_data *specials);
 json_t *equipment_slot(unsigned int slot);
-json_t *export_mob(struct char_data *chr);
+json_t *export_mob(struct char_data *chr, unsigned int number);

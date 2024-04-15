@@ -1935,7 +1935,7 @@ json_t *attack_type(int attack_type) {
     return json_string("SUFFERING");
 
   default:
-    return json_string("UNKNOWN");
+    return json_string("HIT");
   }
 }
 
@@ -2124,13 +2124,15 @@ json_t *act(long act) {
 }
 
 json_t *saving_throw(sh_int apply_saving_throw[ 5 ]) {
-  json_t *array = json_array( );
+  json_t *obj = json_object( );
 
-  for (int i = 0; i < 5; i++) {
-    json_array_append(array, json_integer(apply_saving_throw[ i ]));
-  }
+  json_object_set(obj, "paralysis", json_integer(apply_saving_throw[ 0 ]));
+  json_object_set(obj, "rod", json_integer(apply_saving_throw[ 1 ]));
+  json_object_set(obj, "petrify", json_integer(apply_saving_throw[ 2 ]));
+  json_object_set(obj, "breath", json_integer(apply_saving_throw[ 3 ]));
+  json_object_set(obj, "spell", json_integer(apply_saving_throw[ 4 ]));
 
-  return array;
+  return obj;
 }
 
 json_t *specials(struct char_special_data *specials) {
@@ -2218,10 +2220,10 @@ json_t *equipment_slot(unsigned int slot) {
   }
 }
 
-json_t *export_mob(struct char_data *chr) {
+json_t *export_mob(struct char_data *chr, unsigned int number) {
   json_t *root = json_object( );
 
-  json_object_set(root, "number", json_integer(chr->nr));
+  json_object_set(root, "mobile_number", json_integer(number));
   json_object_set(root, "size", json_integer(chr->size));
 
   json_object_set(root, "race", get_race(chr->race));
@@ -2314,15 +2316,12 @@ int main(void) {
   fprintf(obj_file, "%s\n", json_dumps(objs, JSON_INDENT(2)));
   fclose(obj_file);
 
-  json_t *mobs = json_object( );
+  json_t *mobs = json_array( );
 
   FILE *in_mob_file = fopen(MOB_FILE, "r");
   for (int i = 0; i < top_of_mobt; i++) {
-    char number[ 255 ];
-    sprintf(number, "%d", mob_index[ i ].virtual_number);
-
     struct char_data *chr = read_mobile(in_mob_file, i, REAL);
-    json_object_set(mobs, number, export_mob(chr));
+    json_array_append(mobs, export_mob(chr, mob_index[ i ].virtual_number));
   }
 
   FILE *mob_file = fopen("./mobiles.json", "wt");
