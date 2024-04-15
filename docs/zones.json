@@ -1,0 +1,85 @@
+{
+  "type": "array",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "array of zones for SillyMUD",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "zone_number",
+      "name",
+      "lifespan",
+      "top",
+      "current_total_gold",
+      "last_total_gold",
+      "current_total_pc_gold",
+      "last_total_pc_gold"
+    ],
+    "properties": {
+      "zone_number": {
+        "type": "number",
+        "description": "zone number"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "description": "name of this zone"
+      },
+      "lifespan": {
+        "type": "number",
+        "description": "how long between resets (minutes)"
+      },
+      "top": {
+        "type": "number",
+        "description": "upper limit of rooms for this zone"
+      },
+      "reset_mode": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "description": "when to reset zone"
+        }
+      },
+      "reset_commands": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 0,
+        "items": {
+          "required": [],
+          "properties": {
+            "command": {
+              "type": "string",
+              "minLength": 1,
+              "description": "which reset command to execute"
+            },
+            "if_flag": {
+              "type": "boolean"
+            },
+            "arg1": {
+              "description": "argument one"
+            },
+            "arg2": {
+              "description": "argument two"
+            },
+            "arg3": {
+              "description": "argument three"
+            }
+          }
+        }
+      },
+      "current_total_gold": {
+        "type": "number"
+      },
+      "last_total_gold": {
+        "type": "number"
+      },
+      "current_total_pc_gold": {
+        "type": "number"
+      },
+      "last_total_pc_gold": {
+        "type": "number"
+      }
+    }
+  }
+}

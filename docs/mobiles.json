@@ -1,0 +1,344 @@
+{
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "mobile_number",
+      "size",
+      "race",
+      "immunities",
+      "M_immunities",
+      "susceptabilities",
+      "multi_attack",
+      "hunt_distance",
+      "hates",
+      "fears",
+      "sex",
+      "weight",
+      "height",
+      "name",
+      "short_description",
+      "long_description",
+      "description",
+      "sounds",
+      "distant_sounds",
+      "levels",
+      "abilities",
+      "points",
+      "special"
+    ],
+    "properties": {
+      "mobile_number": {
+        "type": "number",
+        "description": "mobile number"
+      },
+      "size": {
+        "type": "number",
+        "description": "mobile size"
+      },
+      "race": {
+        "type": "string",
+        "minLength": 1,
+        "description": "race of mobile"
+      },
+      "immunities": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "M_immunities": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "susceptabilities": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "multi_attack": {
+        "type": "number"
+      },
+      "hunt_distance": {
+        "type": "number"
+      },
+      "hates": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "fears": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "sex": {
+        "type": "string",
+        "minLength": 1
+      },
+      "weight": {
+        "type": "number"
+      },
+      "height": {
+        "type": "number"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "short_description": {
+        "type": "string",
+        "minLength": 1
+      },
+      "long_description": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "type": "string",
+        "minLength": 1
+      },
+      "sounds": {
+        "type": "string",
+        "minLength": 1
+      },
+      "distant_sounds": {
+        "type": "string",
+        "minLength": 1
+      },
+      "levels": {
+        "type": "object",
+        "properties": {
+          "warrior": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "warrior"
+        ]
+      },
+      "abilities": {
+        "type": "object",
+        "properties": {
+          "strength": {
+            "type": "number"
+          },
+          "strength_add": {
+            "type": "number"
+          },
+          "intelligence": {
+            "type": "number"
+          },
+          "wisdom": {
+            "type": "number"
+          },
+          "dexterity": {
+            "type": "number"
+          },
+          "constitution": {
+            "type": "number"
+          },
+          "charisma": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "strength",
+          "strength_add",
+          "intelligence",
+          "wisdom",
+          "dexterity",
+          "constitution",
+          "charisma"
+        ]
+      },
+      "points": {
+        "type": "object",
+        "properties": {
+          "mana": {
+            "type": "number"
+          },
+          "max_mana": {
+            "type": "number"
+          },
+          "mana_gain": {
+            "type": "number"
+          },
+          "hit": {
+            "type": "number"
+          },
+          "max_hit": {
+            "type": "number"
+          },
+          "hit_gain": {
+            "type": "number"
+          },
+          "move": {
+            "type": "number"
+          },
+          "max_move": {
+            "type": "number"
+          },
+          "move_gain": {
+            "type": "number"
+          },
+          "armor": {
+            "type": "number"
+          },
+          "gold": {
+            "type": "number"
+          },
+          "hit_roll": {
+            "type": "number"
+          },
+          "damage_roll": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "mana",
+          "max_mana",
+          "mana_gain",
+          "hit",
+          "max_hit",
+          "hit_gain",
+          "move",
+          "max_move",
+          "move_gain",
+          "armor",
+          "gold",
+          "hit_roll",
+          "damage_roll"
+        ]
+      },
+      "special": {
+        "type": "object",
+        "properties": {
+          "spell_fail": {
+            "type": "number"
+          },
+          "position": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default_position": {
+            "type": "string",
+            "minLength": 1
+          },
+          "damage_dice": {
+            "type": "number"
+          },
+          "damage_dice_size": {
+            "type": "number"
+          },
+          "conditions": {
+            "type": "object",
+            "properties": {
+              "drunk": {
+                "type": "number"
+              },
+              "full": {
+                "type": "number"
+              },
+              "thirst": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "drunk",
+              "full",
+              "thirst"
+            ]
+          },
+          "zone": {
+            "type": "number"
+          },
+          "attack_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "wimpiness": {
+            "type": "number"
+          },
+          "flee": {
+            "type": "number"
+          },
+          "affected_by": {
+            "type": "array",
+            "items": {
+              "required": [],
+              "properties": {}
+            }
+          },
+          "act": {
+            "type": "array",
+            "items": {
+              "required": [],
+              "properties": {}
+            }
+          },
+          "intrinsics": {
+            "type": "array",
+            "items": {
+              "required": [],
+              "properties": {}
+            }
+          },
+          "apply_saving_throw": {
+            "type": "object",
+            "properties": {
+              "paralysis": {
+                "type": "number"
+              },
+              "rod": {
+                "type": "number"
+              },
+              "petrify": {
+                "type": "number"
+              },
+              "breath": {
+                "type": "number"
+              },
+              "spell": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "paralysis",
+              "rod",
+              "petrify",
+              "breath",
+              "spell"
+            ]
+          }
+        },
+        "required": [
+          "spell_fail",
+          "position",
+          "default_position",
+          "damage_dice",
+          "damage_dice_size",
+          "conditions",
+          "zone",
+          "attack_type",
+          "wimpiness",
+          "flee",
+          "affected_by",
+          "act",
+          "intrinsics",
+          "apply_saving_throw"
+        ]
+      }
+    }
+  }
+}
