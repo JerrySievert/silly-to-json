@@ -9,7 +9,6 @@
 #include <string.h>
 
 #include "conversion.h"
-#include "jansson.h"
 
 struct index_data *mob_index; /* index table for mobile file     */
 int top_of_mobt = 0;
