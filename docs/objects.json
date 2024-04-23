@@ -1,7 +1,7 @@
 {
   "type": "array",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "description": "array of objects for SillyMUD",
   "minItems": 1,
   "uniqueItems": true,
   "items": {
@@ -18,8 +18,7 @@
     ],
     "properties": {
       "object_number": {
-        "type": "number",
-        "description": "object number"
+        "type": "number"
       },
       "flags": {
         "type": "object",

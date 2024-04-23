@@ -977,326 +977,326 @@ json_t *obj_affected_type(struct obj_affected_type *affected) {
   for (int i = 0; i < MAX_OBJ_AFFECT; i++) {
     json_t *obj = json_object( );
 
-    if (affected->location == APPLY_NONE) {
+    if (affected[ i ].location == APPLY_NONE) {
       continue;
     }
 
-    switch (affected->location) {
+    switch (affected[ i ].location) {
     case APPLY_STR:
       json_object_set(obj, "apply", json_string("STR"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_DEX:
       json_object_set(obj, "apply", json_string("DEX"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_INT:
       json_object_set(obj, "apply", json_string("INT"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_WIS:
       json_object_set(obj, "apply", json_string("WIS"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_CON:
       json_object_set(obj, "apply", json_string("CON"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_CHR:
       json_object_set(obj, "apply", json_string("CHR"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SEX:
       json_object_set(obj, "apply", json_string("SEX"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_LEVEL:
       json_object_set(obj, "apply", json_string("LEVEL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_AGE:
       json_object_set(obj, "apply", json_string("AGE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_CHAR_WEIGHT:
       json_object_set(obj, "apply", json_string("WEIGHT"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_CHAR_HEIGHT:
       json_object_set(obj, "apply", json_string("HEIGHT"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_MANA:
       json_object_set(obj, "apply", json_string("MANA"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_HIT:
       json_object_set(obj, "apply", json_string("HIT"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_MOVE:
       json_object_set(obj, "apply", json_string("MOVE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_GOLD:
       json_object_set(obj, "apply", json_string("GOLD"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_EXP:
       json_object_set(obj, "apply", json_string("EXP"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_AC:
       json_object_set(obj, "apply", json_string("AC"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_HITROLL:
       json_object_set(obj, "apply", json_string("HITROLL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_DAMROLL:
       json_object_set(obj, "apply", json_string("DAMROLL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SAVING_PARA:
       json_object_set(obj, "apply", json_string("SAVING_PARA"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SAVING_ROD:
       json_object_set(obj, "apply", json_string("SAVING_ROD"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SAVING_PETRI:
       json_object_set(obj, "apply", json_string("SAVING_PETRI"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SAVING_BREATH:
       json_object_set(obj, "apply", json_string("SAVING_BREATH"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SAVING_SPELL:
       json_object_set(obj, "apply", json_string("SAVING_SPELL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SAVE_ALL:
       json_object_set(obj, "apply", json_string("SAVE_ALL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_IMMUNE:
       json_object_set(obj, "apply", json_string("IMMUNE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SUSC:
       json_object_set(obj, "apply", json_string("SUSC"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_M_IMMUNE:
       json_object_set(obj, "apply", json_string("M_IMMUNE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SPELL:
       json_object_set(obj, "apply", json_string("SPELL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_WEAPON_SPELL:
       json_object_set(obj, "apply", json_string("WEAPON_SPELL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_EAT_SPELL:
       json_object_set(obj, "apply", json_string("EAT_SPELL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_BACKSTAB:
       json_object_set(obj, "apply", json_string("BACKSTAB"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_KICK:
       json_object_set(obj, "apply", json_string("KICK"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SNEAK:
       json_object_set(obj, "apply", json_string("SNEAK"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_HIDE:
       json_object_set(obj, "apply", json_string("HIDE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_BASH:
       json_object_set(obj, "apply", json_string("BASH"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_PICK:
       json_object_set(obj, "apply", json_string("PICK"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_STEAL:
       json_object_set(obj, "apply", json_string("STEAL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_TRACK:
       json_object_set(obj, "apply", json_string("TRACK"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_HITNDAM:
       json_object_set(obj, "apply", json_string("HIT_AND_DAMAGE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SPELLFAIL:
       json_object_set(obj, "apply", json_string("SPELLFAIL"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_ATTACKS:
       json_object_set(obj, "apply", json_string("ATTACKS"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_HASTE:
       json_object_set(obj, "apply", json_string("HASTE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_SLOW:
       json_object_set(obj, "apply", json_string("SLOW"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_BV2:
       json_object_set(obj, "apply", json_string("BV2"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_FIND_TRAPS:
       json_object_set(obj, "apply", json_string("FIND_TRAPS"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_RIDE:
       json_object_set(obj, "apply", json_string("RIDE"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_RACE_SLAYER:
       json_object_set(obj, "apply", json_string("RACE_SLAYER"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_ALIGN_SLAYER:
       json_object_set(obj, "apply", json_string("ALIGN_SLAYER"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_MANA_REGEN:
       json_object_set(obj, "apply", json_string("MANA_REGEN"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_HIT_REGEN:
       json_object_set(obj, "apply", json_string("HIT_REGEN"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_MOVE_REGEN:
       json_object_set(obj, "apply", json_string("MOVE_REGEN"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
     case APPLY_MOVE_BONUS:
       json_object_set(obj, "apply", json_string("MOVE_BONUS"));
-      json_object_set(obj, "modifier", json_integer(affected->modifier));
+      json_object_set(obj, "modifier", json_integer(affected[ i ].modifier));
       json_array_append(array, obj);
       break;
 
