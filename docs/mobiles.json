@@ -1,7 +1,7 @@
 {
   "type": "array",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "description": "array of mobiles for SillyMUD",
   "minItems": 1,
   "uniqueItems": true,
   "items": {
