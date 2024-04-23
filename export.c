@@ -297,7 +297,7 @@ json_t *export_room(struct room_data *room) {
     json_object_set(root, "sector_type", sector_type);
   }
 
-  if (room->river_dir != -1) {
+  if (room->river_dir != -1 && room->river_speed != 0) {
     json_t *river = json_object( );
 
     json_t *river_direction = direction_from_number(room->river_dir);
@@ -1795,6 +1795,9 @@ json_t *get_levels(byte levels[ 8 ]) {
       case 5:
         json_object_set(obj, "monk", json_integer(level));
         break;
+
+      default:
+        json_object_set(obj, "unknown", json_integer(level));
       }
     }
   }
@@ -1861,7 +1864,7 @@ json_t *get_position(byte position) {
     return json_string("RESTING");
 
   case POSITION_SITTING:
-    return json_string("INCAPACITATED");
+    return json_string("SITTING");
 
   case POSITION_FIGHTING:
     return json_string("FIGHTING");
@@ -2229,7 +2232,7 @@ json_t *export_mob(struct char_data *chr, unsigned int number) {
   json_object_set(root, "race", get_race(chr->race));
   json_object_set(root, "immunities", immunities(chr->immune));
   json_object_set(root, "M_immunities", immunities(chr->M_immune));
-  json_object_set(root, "susceptabilities", immunities(chr->susc));
+  json_object_set(root, "susceptibilities", immunities(chr->susc));
 
   json_object_set(root, "multi_attack", json_integer(chr->mult_att));
   json_object_set(root, "hunt_distance", json_integer(chr->hunt_dist));

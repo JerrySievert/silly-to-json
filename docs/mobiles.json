@@ -12,7 +12,7 @@
       "race",
       "immunities",
       "M_immunities",
-      "susceptabilities",
+      "susceptibilities",
       "multi_attack",
       "hunt_distance",
       "hates",
@@ -33,17 +33,14 @@
     ],
     "properties": {
       "mobile_number": {
-        "type": "number",
-        "description": "mobile number"
+        "type": "number"
       },
       "size": {
-        "type": "number",
-        "description": "mobile size"
+        "type": "number"
       },
       "race": {
         "type": "string",
-        "minLength": 1,
-        "description": "race of mobile"
+        "minLength": 1
       },
       "immunities": {
         "type": "array",
@@ -59,7 +56,7 @@
           "properties": {}
         }
       },
-      "susceptabilities": {
+      "susceptibilities": {
         "type": "array",
         "items": {
           "required": [],
@@ -119,13 +116,25 @@
       "levels": {
         "type": "object",
         "properties": {
+          "magic_user": {
+            "type": "number"
+          },
+          "cleric": {
+            "type": "number"
+          },
           "warrior": {
             "type": "number"
+          },
+          "thief": {
+            "type": "number"
+          },
+          "druid": {
+            "type": "number"
+          },
+          "monk": {
+            "type": "number"
           }
-        },
-        "required": [
-          "warrior"
-        ]
+        }
       },
       "abilities": {
         "type": "object",
