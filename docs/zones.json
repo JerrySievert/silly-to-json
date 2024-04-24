@@ -1,6 +1,7 @@
 {
   "type": "array",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/zones.json",
   "description": "array of zones for SillyMUD",
   "minItems": 1,
   "uniqueItems": true,

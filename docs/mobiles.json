@@ -1,6 +1,7 @@
 {
   "type": "array",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/mobiles.json",
   "description": "array of mobiles for SillyMUD",
   "minItems": 1,
   "uniqueItems": true,
@@ -263,14 +264,11 @@
                 "type": "number"
               }
             },
-            "required": [
-              "drunk",
-              "full",
-              "thirst"
-            ]
+            "required": []
           },
           "zone": {
-            "type": "number"
+            "type": "number",
+            "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/zones.json"
           },
           "attack_type": {
             "type": "string",

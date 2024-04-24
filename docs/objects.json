@@ -1,6 +1,7 @@
 {
   "type": "array",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/objects.json",
   "description": "array of objects for SillyMUD",
   "minItems": 1,
   "uniqueItems": true,

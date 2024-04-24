@@ -1,6 +1,7 @@
 {
   "type": "array",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json",
   "description": "array of rooms for SillyMUD",
   "minItems": 1,
   "uniqueItems": true,
@@ -26,7 +27,8 @@
         "type": "number"
       },
       "zone": {
-        "type": "number"
+        "type": "number",
+        "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/zones.json"
       },
       "continent": {
         "type": "number"
@@ -83,7 +85,8 @@
                 "minLength": 1
               },
               "to_room": {
-                "type": "number"
+                "type": "number",
+                "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json"
               }
             }
           },
@@ -95,7 +98,8 @@
                 "minLength": 1
               },
               "to_room": {
-                "type": "number"
+                "type": "number",
+                "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json"
               }
             },
             "required": [
@@ -110,7 +114,8 @@
                 "minLength": 1
               },
               "to_room": {
-                "type": "number"
+                "type": "number",
+                "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json"
               }
             },
             "required": [
@@ -125,7 +130,8 @@
                 "minLength": 1
               },
               "to_room": {
-                "type": "number"
+                "type": "number",
+                "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json"
               }
             },
             "required": [
@@ -140,7 +146,8 @@
                 "minLength": 1
               },
               "to_room": {
-                "type": "number"
+                "type": "number",
+                "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json"
               }
             },
             "required": [
@@ -155,7 +162,8 @@
                 "minLength": 1
               },
               "to_room": {
-                "type": "number"
+                "type": "number",
+                "$ref": "https://raw.githubusercontent.com/JerrySievert/silly-to-json/main/docs/rooms.json"
               }
             },
             "required": [
