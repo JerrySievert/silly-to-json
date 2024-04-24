@@ -1,0 +1,183 @@
+{
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "array of rooms for SillyMUD",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "room_number",
+      "zone",
+      "continent",
+      "sector_type",
+      "river",
+      "mob_limit",
+      "name",
+      "description",
+      "extra_descriptions",
+      "exits",
+      "flags",
+      "light",
+      "dark"
+    ],
+    "properties": {
+      "room_number": {
+        "type": "number"
+      },
+      "zone": {
+        "type": "number"
+      },
+      "continent": {
+        "type": "number"
+      },
+      "sector_type": {
+        "type": "string",
+        "minLength": 1
+      },
+      "river": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "speed": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "direction",
+          "speed"
+        ]
+      },
+      "mob_limit": {
+        "type": "number"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "type": "string",
+        "minLength": 1
+      },
+      "extra_descriptions": {
+        "type": "object",
+        "properties": {
+          "wall": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": []
+      },
+      "exits": {
+        "type": "object",
+        "properties": {
+          "NORTH": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_room": {
+                "type": "number"
+              }
+            }
+          },
+          "EAST": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_room": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "to_room"
+            ]
+          },
+          "SOUTH": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_room": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "to_room"
+            ]
+          },
+          "WEST": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_room": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "to_room"
+            ]
+          },
+          "UP": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_room": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "to_room"
+            ]
+          },
+          "DOWN": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_room": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "to_room"
+            ]
+          }
+        },
+        "required": []
+      },
+      "flags": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "light": {
+        "type": "number"
+      },
+      "dark": {
+        "type": "number"
+      }
+    }
+  }
+}

@@ -284,10 +284,10 @@ json_t *export_room(struct room_data *room) {
   json_t *root = json_object( );
 
   json_t *room_number = json_integer(room->number);
-  json_object_set(root, "number", room_number);
+  json_object_set(root, "room_number", room_number);
 
   json_t *zone = json_integer(room->zone);
-  json_object_set(root, "zone", zone);
+  json_object_set(root, "zone_number", zone);
 
   json_t *continent = json_integer(room->continent);
   json_object_set(root, "continent", continent);
@@ -2273,7 +2273,7 @@ int main(void) {
   boot_mobiles( );
   boot_objects( );
 
-  json_t *rooms = json_object( );
+  json_t *rooms = json_array( );
 
   for (long i = 0; i < room_count; i++) {
     struct room_data *room = room_db[ i ];
@@ -2282,10 +2282,7 @@ int main(void) {
     }
 
     json_t *data = export_room(room);
-
-    char number[ 255 ];
-    sprintf(number, "%d", room->number);
-    json_object_set(rooms, number, data);
+    json_array_append(rooms, data);
   }
 
   FILE *rooms_file = fopen("./rooms.json", "wt");
